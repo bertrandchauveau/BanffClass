@@ -8,6 +8,14 @@ def apply_Banff_2024(df):
   IFTA_df_list = []
   warn_df_list = []
   comment_df_list = []
+  MVI_index_list = []
+  TI_index_list = []
+  activity_index_list = []
+  chronicity_index_list = []
+  borderline_list = []
+  aTCMR_list = []
+  caTCMR_list = []
+  pvn_list = []
   for y in range(0, len(df)): #iterate through rows
       g = df.loc[y, 'g'] if 'g' in df.columns else np.nan
       ptc = df.loc[y, 'ptc'] if 'ptc' in df.columns else np.nan
@@ -34,6 +42,7 @@ def apply_Banff_2024(df):
       ATI = df.loc[y, 'ATI'] if 'ATI' in df.columns else np.nan
       chronic_transplant_arteriopathy = df.loc[y, 'chronic_transplant_arteriopathy'] if 'chronic_transplant_arteriopathy' in df.columns else np.nan
       ABOi = df.loc[y, 'ABOi'] if 'ABOi' in df.columns else np.nan #np.nan
+      cv = df.loc[y, 'cv'] if 'cv' in df.columns else np.nan
       
       #check for missing core variables
       warn_var_list = []
@@ -49,7 +58,7 @@ def apply_Banff_2024(df):
       if len(nan_variables)>0:
           impact_cat = list(np.unique(impact_cat))
           warn_var_list.append(f'Missing core variables for correct classification of {", ".join(impact_cat)}: {", ".join(nan_variables)}')
-
+  
       #TI related diagnoses
       TI_diagnosis_list = []
       TCMR_diagnosis_list = []
@@ -113,7 +122,7 @@ def apply_Banff_2024(df):
       MVI_diagnosis_list = []
       criterion_list = []
       warn_MVI_list = []
-
+  
       #(chronic) active AMR
       #criterion 1
       if v > 0 or TMA > 0 or (g > 0 or (ptc > 0 and not (any(['TCMR' in element for element in TI_diagnosis_list]) or 'Borderline changes' in TI_diagnosis_list or 'Polyomavirus nephropathy' in TI_diagnosis_list or infection==1))):
@@ -154,8 +163,8 @@ def apply_Banff_2024(df):
       #warning about recurrent GN and MVI related diagnoses
       if (any(['ctive AMR' in element for element in MVI_diagnosis_list]) or "Probable AMR" in MVI_diagnosis_list or "MVI C4d/DSA negative" in MVI_diagnosis_list) and g >0 and recurrent_GN>0:
           warn_MVI_list.append("MVI with glomerulitis is present, matching an MVI-related diagnosis, in the context of recurrent or de novo glomerulonephritis. Clinicopathological correlation is required.")
-
-
+  
+  
       #add MVI and TI related features for final diagnosis
       diagnosis_list = TI_diagnosis_list + MVI_diagnosis_list
       warn_list = warn_var_list + warn_TI_list + warn_MVI_list
@@ -174,14 +183,14 @@ def apply_Banff_2024(df):
           IFTA = 0
       else:
           IFTA = 'NA'
-
+  
       
       #comment for ABOi transplantation
       if ABOi >0:
           warn_list.append("C4d interpreted as negative for ABOi cases.")
       if len(warn_list)==0:
           warn_list.append("no")
-
+  
       #Banff comments for incomplete/complex phenotype
       comment_list = []
       if (any(['TCMR' in element for element in diagnosis_list]) or 'Borderline changes' in diagnosis_list) and len(MVI_diagnosis_list)==0 and ptc > 0:
@@ -226,18 +235,56 @@ def apply_Banff_2024(df):
           comment_list.append("Comment: C4d is positive in peritubular capillaries in the absence of any other histological features of AMR; DSA is negative. Biopsy-based transcriptomic analysis is positive for evidence of AMR. To date, there is no consensus on whether this represents AMR. Further research is necessary to determine the prevalence, impact, and best treatment for this phenotype. More information on the clinical context may be of help for clinical decision making, including consideration of repeat biopsy.")
       if len(comment_list)==0:
           comment_list.append("no")
-
-      #append diagnoses
+  
+      #add indices
+      MVI_index = g * 0.938 + ptc * 0.762 + cg * 0.728 + C4d * 2.716
+      #TCMR/TI index
+      TI_index = i * 0.970 + t * 0.623 + v * 1.540 + ct * 0.195
+      #activity index
+      activity_index = t + i + v + g + ptc + 2 * C4d   
+      #chronicity index
+      chronicity_index = ci + ct + cv + 2 * cg
+  
+      #add dummy variables for each TCMR diagnosis, not mutually exclusive
+      diagnosis_positions = {
+          'Borderline':                0,
+          'Acute TCMR':                1,
+          'Chronic active TCMR':       2,
+          'Polyomavirus nephropathy': 3,
+      }
+      #Start with all zeros (five elements)
+      result = [0] * len(diagnosis_positions)
+      for keyword, idx in diagnosis_positions.items():
+          if any(keyword in element for element in TI_diagnosis_list):
+              result[idx] = 1
+      borderline_list.append(result[0])
+      aTCMR_list.append(result[1])
+      caTCMR_list.append(result[2])
+      pvn_list.append(result[3])
+      
+      #append diagnoses and indices
       TI_df_list.append(', '.join(TI_diagnosis_list))
       MVI_df_list.append(', '.join(MVI_diagnosis_list))
       IFTA_df_list.append(IFTA)
       warn_df_list.append(' '.join(warn_list))
       comment_df_list.append(' '.join(comment_list))
-
+      MVI_index_list.append(MVI_index)
+      TI_index_list.append(TI_index)
+      activity_index_list.append(activity_index)
+      chronicity_index_list.append(chronicity_index)
+  
   df['TI diagnosis'] = TI_df_list
   df['MVI diagnosis'] = MVI_df_list
   df['IFTA grade'] = IFTA_df_list
   df['warning'] = warn_df_list
   df['comment'] = comment_df_list
+  df['borderline'] = borderline_list
+  df['aTCMR'] = aTCMR_list
+  df['caTCMR'] = caTCMR_list
+  df['PVN'] = pvn_list
+  df['AMR/MVI index'] = MVI_index_list
+  df['TCMR/TI index'] = TI_index_list
+  df['Activity index'] = activity_index_list
+  df['Chronicity index'] = chronicity_index_list
 
 
