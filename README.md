@@ -2,7 +2,7 @@
 To apply the Banff classification based on individual Banff scores and additional clinico-biological parameters, together with the continuous indices.
 
 This repository contains the code of the web-based application Banff Application System, available at: **pending**.
-BanffClass is a collaborative work between the Nephrology and Renal Transplantation Research Group of KU Leuven (Pr. Maarten Naesens) and the ImmunoConcept laboratory of the University of Bordeaux (Dr Bertrand Chauveau).
+BanffClass is a collaborative work between the Nephrology and Renal Transplantation Research Group of **KU Leuven (Pr. Maarten Naesens)** and the ImmunoConcept laboratory of the **University of Bordeaux (Dr Bertrand Chauveau)**.
 
 **Current supported Banff classification is: 2022-2024 updates.**
 
