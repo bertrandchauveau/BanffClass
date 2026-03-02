@@ -1,17 +1,21 @@
-# BanffApplicationSystem
-To apply the Banff classification based on individual Banff scores and additional clinico-biological parameters.
+# BanffClass
+To apply the Banff classification based on individual Banff scores and additional clinico-biological parameters, together with the continuous indices.
 
 This repository contains the code of the web-based application Banff Application System, available at: **pending**.
+BanffClass is a collaborative work between the Nephrology and Renal Transplantation Research Group of KU Leuven (Pr. Maarten Naesens) and the ImmunoConcept laboratory of the University of Bordeaux (Dr Bertrand Chauveau).
 
-**Current supported Banff classificatio is: 2022-2024 updates.**
+**Current supported Banff classification is: 2022-2024 updates.**
 
 **Usage instructions**:
-A pandas dataframe should be provided (from a csv or excel file). The first row (header) should include the name of the variables. Use the provided template to know the exact name of the variables that should be provided. Do not duplicate any columns, each variable should have only one column. Missing variables should be blank cells. The order of the variables in the excel sheet does not matter.
-The process will create four additional columns to your input excel:
+A pandas dataframe should be provided (from a csv or excel file). The first row (header) should include the name of the variables. Use the provided template to know the exact name of the variables that should be provided. Do not duplicate any columns, each variable should have only one column. Missing variables should be blank cells and are not imputed. The order of the variables in the excel sheet does not matter.
+The process will create thirteen additional columns to your input dataframe:
 - **TI diagnosis**: tubulo-interstitial-related diagnosis (TCMR and/or polyomavirus nephropathy). Blank if no reached rejection phenotype.
 - **MVI diagnosis**: microvascular inflammation-related diagnosis (MVI/AMR). Blank if no reached rejection phenotype.
+- **IFTA grade**
 - **warning**: warnings are displayed when major variables are missing, that could lead to miss some rejection cases.
 - **comment**: when appropriate, comments are proposed, according to the 2024 Banff classification report.
+- Four columns individualizing major tubulo-interstitial phenotypes as one-hot encoded variables (to interpret cautiously together with missing variables)
+- The indices, namey **AMV/MVI, TCMR/TI, activity and chronicity indices**
 
 An example is provided in the jupyter notebook.
 
