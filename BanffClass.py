@@ -46,7 +46,7 @@ def apply_Banff_2024(df):
       
       #check for missing core variables
       warn_var_list = []
-      core_variables_names = ['g', 'ptc', 'i', 't', 'v', 'cg', 'C4d', 'current_DSA', 'ti', 'i_IFTA'] #caTCMR can rely on t
+      core_variables_names = ['g', 'ptc', 'i', 't', 'v', 'cg', 'C4d', 'current_DSA', 'ti', 'i_IFTA'] #caTCMR does not rely on t
       core_variables = [g, ptc, i, t, v, cg, C4d, current_DSA, ti, i_IFTA]
       nan_variables = []
       nan_var_dict = {'g':'AMR', 'ptc':'AMR', 'i':'TCMR', 't':'TCMR', 'v':'TCMR and/or AMR', 'cg':'cAMR', 'C4d':'AMR', 'current_DSA':'AMR', 'ti':'caTCMR', 'i_IFTA':'caTCMR'}
@@ -95,9 +95,9 @@ def apply_Banff_2024(df):
               TCMR_diagnosis_list.append("Borderline changes")
               
       #Chronic active TCMR
-      if ti >=2 and i_IFTA >=2 and (t == 3 or t_IFTA == 3):
+      if ti >=2 and i_IFTA >=2 and t == 3:
           TCMR_diagnosis_list.append("Chronic active TCMR IB")
-      if ti >=2 and i_IFTA >=2 and (t == 2 or t_IFTA == 2) and "Chronic active TCMR IB" not in TCMR_diagnosis_list: #otherwise IB and IA can co-occur when t3/t-IFTA2
+      if ti >=2 and i_IFTA >=2 and t == 2:
           TCMR_diagnosis_list.append("Chronic active TCMR IA")
       if chronic_transplant_arteriopathy ==1:
           TCMR_diagnosis_list.append("Chronic active TCMR II")
