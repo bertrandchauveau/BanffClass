@@ -1,10 +1,10 @@
 # BanffClass - a Kidney Transplant Biopsy Classification Tool
 
 
-BanffClass is a free, open-source desktop application designed to apply the Banff classification for kidney allograft pathology based on individual histological scores and clinico-biological parameters. It provides both rejection diagnoses and continuous indices in a user-friendly interface.
+BanffClass is a free desktop application designed to apply the Banff classification for kidney allograft pathology based on individual histological scores and clinico-biological parameters. It provides both rejection diagnoses and continuous indices in a user-friendly interface.
 
 ## 🚀 About
-BanffClass is a desktop application that helps pathologists, nephrologists, and researchers apply the 2024 Banff classification for kidney transplant biopsies. The tool:
+BanffClass is a desktop application that helps pathologists, nephrologists, and researchers apply the Banff classification for kidney transplant biopsies. The tool:
 - Implements the Banff 2022-2024 updates as closely as possible to the official guidelines
 - Provides both case-by-case analysis and batch processing modes
 - Computes rejection diagnoses (TCMR, AMR/MVI) and continuous indices
@@ -26,7 +26,7 @@ This application is **NOT meant for clinical use**. It is provided for **RESEARC
 - macOS: macOS Catalina (10.15) or later
 
 ### Downloading the Application
-- Go to the [Releases page](https://github.com/bertrandchauveau/banffclass_local/releases/latest))
+- Go to the [Releases page](https://github.com/bertrandchauveau/banffclass_local/releases/latest)
 - Download the latest release for your operating system:
   - BanffClass-windows.zip (for Windows users)
   - BanffClass-macos.zip (for macOS users)
@@ -38,7 +38,7 @@ These applications are unsigned. This means that:
 - Windows: You'll see a "Windows protected your PC" warning
 - macOS: You'll encounter "Gatekeeper" warnings (see below)
 
-This is normal and expected. The application is open-source, and you can verify the code yourself on GitHub.
+This is normal and expected.
 
 ### For Institutional/Enterprise Devices
 If you're installing this on an institutional or corporate device:
@@ -63,6 +63,7 @@ If you're installing this on an institutional or corporate device:
   - At the bottom of the "General" tab, check: ☐ Unblock
 - Click Apply and then OK
 - Now double-click to run normally
+- (Optional): create a shortcut of BanffClass.exe
 
 ### 🍎 macOS Users - How to Open
 When you first try to open BanffClass on macOS: "BanffClass" cannot be opened because the developer cannot be verified. This is Gatekeeper protection, which verifies that apps come from trusted developers.
@@ -87,7 +88,7 @@ The application includes an automatic update checker that notifies you when a ne
 ### Update Process (Manual)
 Since applications are unsigned, the auto-update feature only shows a notification - it doesn't install automatically. To update:
 
-- Download the latest release from our [Releases page](https://github.com/bertrandchauveau/banffclass_local/releases/latest))
+- Download the latest release from our [Releases page](https://github.com/bertrandchauveau/banffclass_local/releases/latest)
 - Close BanffClass if it's running
 - Replace the entire application folder with the new version:
   - Windows: Extract and replace BanffClass.exe (you can delete the old one or keep both versions side-by-side)
@@ -103,8 +104,26 @@ This software is provided for **educational and research purposes only**. It sho
 
 By using this application, you agree that:
 - The developers are not responsible for any diagnostic errors
-- You will verify all results manually in critical cases
 - Your use of this software is at your own risk
+
+## Usage instructions (.py script)
+To use BanffClass outside of the application via scripting, see banff_single.py. Input variables should be provided as a dictionary following the specifications below (otherwise, use np.nan):
+- **g**, **ptc**, **i**, **t**, **v**, **ci**, **ct**, **ti**, **i-IFTA**, **t-IFTA**: corresponding Banff scores, from 0 to 3
+- **cg**: cg Banff score, from 0 to 3 (1a/1b => 1)
+- **C4d**: **C4d score as a binary variable 0/1**. It is up to you to binarize the C4d Banff score from 0 to 3 into 0/1 based on your technics (immunofluorescence positive if Banff score > 1, chromogenic IHC positive if Banff score > 0).
+- **pvl**: pvl Banff score, from 0 to 3
+- **TMA**: binary variable 0/1, 1 if histological lesions of thrombotic microangiopathy are observed
+- **ATI**: binary variable 0/1, 1 if histological acute tubular injury is present
+- **ptcml**: binary variable 0/1, 1 if severe peritubular capillary basement membrane multilayering is present by electron microscopy
+- **current DSA**: binary variable 0/1, 1 if presence of DSA in the serum at time of the biopsy
+- **historical DSA**: binary variable 0/1, 1 if anteriority of DSA detection
+- **historical AMR**: binary variable 0/1, 1 if anteriority of AMR
+- **transcripts MVI**: binary variable 0/1, 1 if tissue transcriptomics is in favor of an MVI/AMR-related diagnosis
+- **transcripts TI**: binary variable 0/1, 1 if tissue transcriptomics is in favor of an tubulo-interstitial/TCMR-related diagnosis
+- **infection**: binary variable 0/1, 1 if presence of an infection-related nephritis. Will be automatically set to 1 if pvl is > 0.
+- **recurrent/de novo GN**: binary variable 0/1, 1 if presence of recurrent or de novo glomerulonephritis.
+- **chronic transplant arteriopathy**: binary variable 0/1, 1 if presence of “chronic allograft arteriopathy” is present (arterial intimal fibrosis with mononuclear cell infiltration in fibrosis, and formation of neointima).
+- **ABOi**: binary variable 0/1, 1 if current transplantation is in a ABO incompatible context
 
 ## 📬 Contact
 Dr. Bertrand Chauveau
