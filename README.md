@@ -18,7 +18,10 @@ BanffClass is a desktop application that helps pathologists, nephrologists, and 
 - 💻 Cross-Platform	(Windows and macOS)
 
 ## ⚠️ Important Notice
-This application is **NOT meant for clinical use**. It is provided for **RESEARCH AND EDUCATIONAL purposes only**. By using this application, you agree to the License terms (available when launching the app).
+This application is **NOT meant for clinical use**. It is provided for **RESEARCH AND EDUCATIONAL purposes only**. Please refer to the [official Banff classification documentation](https://banfffoundation.org/central-repository-for-banff-classification-resources-3/) for complete guidelines.
+By using this application, you agree to the License terms (available when launching the app) and that:
+- The developers are not responsible for any diagnostic errors
+- Your use of this software is at your own risk
 
 ## 📥 Installation
 ### System Requirements
@@ -38,7 +41,8 @@ These applications are unsigned. This means that:
 - Windows: You'll see a "Windows protected your PC" warning
 - macOS: You'll encounter "Gatekeeper" warnings (see below)
 
-This is normal and expected.
+This is normal and expected. Download only from [the release page](https://github.com/bertrandchauveau/BanffClass/releases) of this repository. 
+Optionally verify the file against the SHA-256 checksum on the release page.
 
 ### For Institutional/Enterprise Devices
 If you're installing this on an institutional or corporate device:
@@ -48,39 +52,24 @@ If you're installing this on an institutional or corporate device:
 - Some institutions require approval for any software installation
 - Your IT team can help ensure compliance with local security requirements
 
-### 🖥️ Windows Users - How to Open
-- Extract the ZIP file using File Explorer or WinRAR/7-Zip
-- Navigate to the extracted folder and find BanffClass.exe
-- When you double-click, you may see:
-  - Windows protected your PC
-  - Microsoft Defender SmartScreen prevented an unrecognized app from starting.
-- To proceed:
-  - Click on "More info" in the popup window
-  - Then click "Run anyway"
-- Alternatively, you can bypass the warning entirely:
-  - Right-click on BanffClass.exe
-  - Select Properties
-  - At the bottom of the "General" tab, check: ☐ Unblock
-- Click Apply and then OK
-- Now double-click to run normally
-- (Optional): create a shortcut of BanffClass.exe
+### 🖥️ Windows
+1. Download `BanffClass-windows.zip`.
+2. Right-click the ZIP → Properties → tick **Unblock** at the bottom of the
+   General tab → OK.
+3. Extract the ZIP (File Explorer, 7-Zip, WinRAR), open the folder, and
+   double-click `BanffClass.exe`.
+4. If you still see "Windows protected your PC": click **More info**, then
+   **Run anyway**.
 
-### 🍎 macOS Users - How to Open
-When you first try to open BanffClass on macOS: "BanffClass" cannot be opened because the developer cannot be verified. This is Gatekeeper protection, which verifies that apps come from trusted developers.
+Optional: create a shortcut of BanffClass.exe
 
-- Method 1: Right-Click Open (Recommended)
-  - Find BanffClass.app in your extracted folder
-  - Right-click on it and select Open
-  - In the dialog box, click "Open" again
-  - This allows you to open the app without changing system settings.
-
-- Method 2: System Preferences Override
-  - If right-click doesn't work:
-  - Attempt to open the app once (which will likely fail).
-  - Go to System Settings/Settings → Privacy & Security
-  - Scroll down to the Security section
-  - You'll see a message about BanffClass being blocked
-  - Click "Open Anyway"
+### 🍎 macOS
+1. Download the macOS build and move `BanffClass.app` to Applications.
+2. Double-click it. You will see a warning; click **Done** (not "Move to
+   Trash").
+3. Open **System Settings → Privacy & Security**, scroll to **Security**,
+   and click **Open Anyway** next to the BanffClass message.
+4. Enter your password or Touch ID, then click **Open**.
 
 ## 🔄 Updating BanffClass
 The application includes an automatic update checker that notifies you when a new version is available.
@@ -97,14 +86,6 @@ Since applications are unsigned, the auto-update feature only shows a notificati
   - Windows: May need to "Run anyway" again (or unblock properties)
   - macOS: Will need to right-click → Open or use System Settings override
 - 💡 Tip: You don't lose any data when updating. BanffClass doesn't store patient data locally.
-
-
-## 📄 License & Disclaimer
-This software is provided for **educational and research purposes only**. It should not be used as the sole basis for clinical decisions. Please refer to the [official Banff classification documentation](https://banfffoundation.org/central-repository-for-banff-classification-resources-3/) for complete guidelines.
-
-By using this application, you agree that:
-- The developers are not responsible for any diagnostic errors
-- Your use of this software is at your own risk
 
 ## Usage instructions (.py script)
 To use BanffClass outside of the application via scripting, see banff_single.py. Input variables should be provided as a dictionary following the specifications below (otherwise, use np.nan):
@@ -140,5 +121,21 @@ BanffClass – an application for the classification of renal transplant biopsie
 ## ⚖️ Legal Notice
 This software is not affiliated with or endorsed by the Banff Foundation. The Banff classification system is used under fair academic use guidelines.
 
+The source code in this repository is licensed under the GNU Affero General
+Public License v3.0 or later. The AGPL does not grant any rights
+to the name "BanffClass" or to the project logo, which remain the property of
+KU Leuven (Maarten Naesens) and University of Bordeaux (Bertrand Chauveau).
+
+- You may redistribute the **unmodified** official releases, provided you keep
+  the name, the version number and this notice intact.
+- You may fork, modify and redistribute the source code under the AGPL, but a
+  modified version **must not** be distributed under the name "BanffClass" or
+  with our logo, and must not suggest that it is the official version or is
+  endorsed by the authors and their institution.
+- Modified versions must state clearly that they are modified and who modified
+  them, in the software and its documentation.
+
+Official releases are published only in this repository, with SHA-256
+checksums. Builds obtained elsewhere are not guaranteed to be authentic.
 
 Made with ❤️ for the kidney transplant community
