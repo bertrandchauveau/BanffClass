@@ -61,10 +61,10 @@ If you're installing this on an institutional or corporate device:
 4. If you still see "Windows protected your PC": click **More info**, then
    **Run anyway**.
 
-Optional: create a shortcut of BanffClass.exe
+Optional: move the app folder to a desired location and create a shortcut of BanffClass.exe
 
 ### 🍎 macOS
-1. Download the macOS build and move `BanffClass.app` to Applications.
+1. Download the macOS build, unzip it and move `BanffClass.app` to Applications.
 2. Double-click it. You will see a warning; click **Done** (not "Move to
    Trash").
 3. Open **System Settings → Privacy & Security**, scroll to **Security**,
