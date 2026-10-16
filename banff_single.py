@@ -1,5 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-# Copyright (c) 2026 KU Leuven and University of Bordeaux
+# COPYRIGHT © 2026 KU Leuven and Université de Bordeaux
 
 import numpy as np
 import pandas as pd
@@ -36,10 +35,10 @@ def apply_Banff_2024_single(banff_dict):
     
     #check for missing core variables
     warn_var_list = []
-    core_variables_names = ['g', 'ptc', 'i', 't', 'v', 'cg', 'C4d', 'current DSA', 'ti', 'i-IFTA'] #caTCMR relies on t
-    core_variables = [g, ptc, i, t, v, cg, C4d, current_DSA, ti, i_IFTA]
+    core_variables_names = ['g', 'ptc', 'i', 't', 'v', 'cg', 'C4d', 'current DSA', 'ti', 'i-IFTA', 't-IFTA']
+    core_variables = [g, ptc, i, t, v, cg, C4d, current_DSA, ti, i_IFTA, t_IFTA]
     nan_variables = []
-    nan_var_dict = {'g':'AMR', 'ptc':'AMR', 'i':'TCMR', 't':'TCMR', 'v':'TCMR and/or AMR', 'cg':'cAMR', 'C4d':'AMR', 'current DSA':'AMR', 'ti':'caTCMR', 'i-IFTA':'caTCMR'}
+    nan_var_dict = {'g':'AMR', 'ptc':'AMR', 'i':'TCMR', 't':'TCMR', 'v':'TCMR and/or AMR', 'cg':'cAMR', 'C4d':'AMR', 'current DSA':'AMR', 'ti':'caTCMR', 'i-IFTA':'caTCMR', 't-IFTA':'caTCMR'}
     impact_cat = []
     for var_name, variable in zip(core_variables_names, core_variables):
         if np.isnan(variable):
@@ -85,9 +84,9 @@ def apply_Banff_2024_single(banff_dict):
             TCMR_diagnosis_list.append("Borderline changes")
             
     #Chronic active TCMR
-    if ti >=2 and i_IFTA >=2 and t == 3:
+    if ti >=2 and i_IFTA >=2 and (t == 3 or t_IFTA == 3):
         TCMR_diagnosis_list.append("Chronic active TCMR IB")
-    if ti >=2 and i_IFTA >=2 and t == 2:
+    if ti >=2 and i_IFTA >=2 and (t == 2 or t_IFTA == 2) and t != 3 and t_IFTA != 3: #not IB
         TCMR_diagnosis_list.append("Chronic active TCMR IA")
     if chronic_transplant_arteriopathy ==1:
         TCMR_diagnosis_list.append("Chronic active TCMR II")
@@ -95,10 +94,12 @@ def apply_Banff_2024_single(banff_dict):
     #check for diagnosis combination
     #accepting infection-related nephritis and v+ as combined rejection and nephritis. Warning otherwise while favoring infection.
     if len(infection_list)>0 and len(TCMR_diagnosis_list)>0 and any(['TCMR II' in element for element in TCMR_diagnosis_list]):
+        #subselect only TCMR grade >= II diagnoses (if concomittant caTCMR)
+        TCMR_diagnosis_list = [dg for dg in TCMR_diagnosis_list if 'TCMR II' in dg]
         TI_diagnosis_list = infection_list + TCMR_diagnosis_list
     elif len(infection_list)>0 and len(TCMR_diagnosis_list)>0 and not any(['TCMR II' in element for element in TCMR_diagnosis_list]):
         TI_diagnosis_list = infection_list
-        warn_TI_list.append('Tubulo-interstitial infiltrate could be related to infection, but is also above threshold for T cell-mediated alloimmune process; consider treatment depending on clinical evolution/consider re-biopsy')
+        warn_TI_list.append('Tubulo-interstitial infiltrate could be related to infection, but is also above threshold for T cell-mediated alloimmune process. Clinicopathological correlation is required.')
     elif len(infection_list)>0 and len(TCMR_diagnosis_list)==0:
         TI_diagnosis_list = infection_list
     else:
