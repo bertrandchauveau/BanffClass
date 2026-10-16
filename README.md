@@ -19,7 +19,7 @@ BanffClass is a desktop application that helps pathologists, nephrologists, and 
 
 ## ⚠️ Important Notice
 This application is **NOT meant for clinical use**. It is provided for **RESEARCH AND EDUCATIONAL purposes only**. Please refer to the [official Banff classification documentation](https://banfffoundation.org/central-repository-for-banff-classification-resources-3/) for complete guidelines.
-By using this application, you agree to the License terms (available when launching the app) and that:
+By using this application, you agree to the Research License Agreement (available in the repository and within the app) and that:
 - The developers are not responsible for any diagnostic errors
 - Your use of this software is at your own risk
 
@@ -84,7 +84,7 @@ Since applications are unsigned, the auto-update feature only shows a notificati
   - macOS: Move the old BanffClass.app to Trash, then extract the new one
 - Repeat the installation steps for your OS:
   - Windows: May need to "Run anyway" again (or unblock properties)
-  - macOS: Will need to right-click → Open or use System Settings override
+  - macOS: Use System Settings override
 - 💡 Tip: You don't lose any data when updating. BanffClass doesn't store patient data locally.
 
 ## Usage instructions (.py script)
@@ -121,19 +121,7 @@ BanffClass – an application for the classification of renal transplant biopsie
 ## ⚖️ Legal Notice
 This software is not affiliated with or endorsed by the Banff Foundation. The Banff classification system is used under fair academic use guidelines.
 
-The source code in this repository is licensed under the GNU Affero General
-Public License v3.0 or later. The AGPL does not grant any rights
-to the name "BanffClass" or to the project logo, which remain the property of
-KU Leuven (Maarten Naesens) and University of Bordeaux (Bertrand Chauveau).
-
-- You may redistribute the **unmodified** official releases, provided you keep
-  the name, the version number and this notice intact.
-- You may fork, modify and redistribute the source code under the AGPL, but a
-  modified version **must not** be distributed under the name "BanffClass" or
-  with our logo, and must not suggest that it is the official version or is
-  endorsed by the authors and their institution.
-- Modified versions must state clearly that they are modified and who modified
-  them, in the software and its documentation.
+See the Research License Agreement and the software license prior to any use of the application.
 
 Official releases are published only in this repository, with SHA-256
 checksums. Builds obtained elsewhere are not guaranteed to be authentic.
