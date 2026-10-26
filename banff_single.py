@@ -61,7 +61,7 @@ def apply_Banff_2024_single(banff_dict):
         infection=1
     
     #Acute TCMR
-    if i >=2 and t >=2 or transcripts_TI==1:
+    if i >=2 and t >=2:
         if v==1:
             TCMR_diagnosis_list.append("Acute TCMR IIA")
         if v==2:
