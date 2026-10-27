@@ -140,7 +140,7 @@ def apply_Banff_2024_single(banff_dict):
         MVI_diagnosis_list.append("C4d without evidence of rejection")
     
     #Microvascular inflammation/injury (MVI), DSA-negative and C4d-negative
-    if (np.nansum([g, ptc]) >= 2 and not ((g==0 or np.isnan(g)) and (any(['TCMR' in element for element in TI_diagnosis_list]) or 'Borderline changes' in TI_diagnosis_list or 'Polyomavirus nephropathy' in TI_diagnosis_list or infection==1))) and C4d==0 and current_DSA==0:
+    if (transcripts_MVI==1 or (np.nansum([g, ptc]) >= 2 and not ((g==0 or np.isnan(g)) and (any(['TCMR' in element for element in TI_diagnosis_list]) or 'Borderline changes' in TI_diagnosis_list or 'Polyomavirus nephropathy' in TI_diagnosis_list or infection==1)))) and C4d==0 and current_DSA==0:
         MVI_diagnosis_list.append("MVI C4d/DSA negative")
     
     #Probable AMR
