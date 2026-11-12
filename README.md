@@ -29,7 +29,7 @@ By using this application, you agree to the Research License Agreement (availabl
 - macOS: macOS Catalina (10.15) or later
 
 ### Downloading the Application
-- Go to the [Releases page](https://github.com/bertrandchauveau/banffclass_local/releases/latest)
+- Go to the [Releases page](https://github.com/bertrandchauveau/banffclass/releases/latest)
 - Download the latest release for your operating system:
   - BanffClass-windows.zip (for Windows users)
   - BanffClass-macos.zip (for macOS users)
