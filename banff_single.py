@@ -106,13 +106,14 @@ def apply_Banff_2024_single(banff_dict):
         TI_diagnosis_list = TCMR_diagnosis_list
     
     #MVI/AMR
-    #consider C4d as negative if ABOi transplantation
-    if ABOi > 0:
-        C4d=0
-    
     MVI_diagnosis_list = []
     criterion_list = []
     warn_MVI_list = []
+  
+    #consider C4d as negative/non-contributing if ABOi transplantation
+    if ABOi > 0:
+        C4d=0
+        warn_MVI_list.append("C4d considered as negative/non-contributing to an AMR diagnosis in an ABO-incompatible transplantation.")
     
     #(chronic) active AMR
     #criterion 1
