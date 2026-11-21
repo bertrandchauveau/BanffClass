@@ -1,0 +1,38 @@
+[project]
+name = "banffclass"
+version = "1.0.0"
+description = "Apply the Banff classification from individual lesion scores for research and educational purposes"
+readme = "README.md"
+requires-python = ">=3.12, <3.13"
+authors = [
+    { name = "Bertrand Chauveau", email = "bertrand.chauveau@chu-bordeaux.fr" },
+    { name = "Maarten Naesens", email = "maarten.naesens@kuleuven.be" }
+]
+dependencies = [
+    "flet>=0.86.5,<1.0.0",
+    "pandas~=2.3.3",
+    "numpy>=2.4.2,<2.6",
+    "xlsxwriter~=3.2.9",
+    "openpyxl~=3.1.5",
+]
+
+# Add this section to fix the jni dependency issue
+#https://github.com/flet-dev/flet/issues/6919
+[tool.flet.flutter.pubspec.dependency_overrides]
+jni = "^1.1.0"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.flet]
+org = "org.univ-bordeaux"
+bundle_id = "org.univ-bordeaux.banffclass"
+product = "BanffClass"
+artifact = "BanffClass"
+company = "University of Bordeaux"
+copyright = "Copyright (C) 2026 KU Leuven, Université de Bordeaux and Centre national de la recherche scientifique"
+
+[tool.flet.app]
+path = "src"
+module = "main.py"
