@@ -116,7 +116,7 @@ Prof. Maarten Naesens
 - Department of Nephrology, University Hospitals Leuven
 
 ## 📝 How to Cite
-BanffClass – an application for the classification of renal transplant biopsies. Bertrand Chauveau, Maarten Naesens. Version 0.1.0 (2026‑08‑25). Available at: https://github.com/bertrandchauveau/BanffClass
+BanffClass – an application for the classification of renal transplant biopsies. Bertrand Chauveau, Maarten Naesens. Version 1.0.0 (2026‑11-20). Available at: https://github.com/bertrandchauveau/BanffClass
 
 ## ⚖️ Legal Notice
 This software is not affiliated with or endorsed by the Banff Foundation. The Banff classification system is used under fair academic use guidelines.
