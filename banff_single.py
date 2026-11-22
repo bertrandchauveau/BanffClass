@@ -176,9 +176,6 @@ def apply_Banff_2024_single(banff_dict):
     else:
         IFTA = 'NA'
     
-    #comment for ABOi transplantation
-    if ABOi >0:
-        warn_list.append("C4d interpreted as negative for ABOi cases.")
     if len(warn_list)==0:
         warn_list.append("no")
     
